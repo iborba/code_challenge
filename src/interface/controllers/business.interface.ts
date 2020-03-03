@@ -1,10 +1,10 @@
-import IReviews from "./reviews.interface";
+import IReview from "./review.interface";
 
 interface IBusiness {
   id: string
   name: string
-  location: string[]
-  reviews: IReviews
+  location: any
+  reviews: IReview[]
 }
 
 export default IBusiness

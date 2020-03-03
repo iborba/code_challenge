@@ -1,9 +1,9 @@
 import IUser from "./user.interface";
 
-interface IReviews {
+interface IReview {
   text: string
   rating: string
   user: IUser
 }
 
-export default IReviews
+export default IReview

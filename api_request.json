@@ -1,1 +1,213 @@
-{"_type":"export","__export_format":4,"__export_date":"2020-03-04T02:33:56.061Z","__export_source":"insomnia.desktop.app:v7.1.1","resources":[{"_id":"req_199fb5aca41f4eb799fca4269c56015c","authentication":{},"body":{},"created":1583175933305,"description":"","headers":[{"description":"","disabled":false,"id":"pair_1d5326884da346b9aafb9a81a7df6473","name":"Authorization","value":"Bearer {{ apiKey  }}"}],"isPrivate":false,"metaSortKey":-1583175933305,"method":"GET","modified":1583289206056,"name":"code-challenge business","parameters":[],"parentId":"wrk_6f5de43dabca4486bbecfb1dd9a933d2","settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingFollowRedirects":"global","settingRebuildPath":true,"settingSendCookies":true,"settingStoreCookies":true,"url":"{{ localhostUrl }}/api/business","_type":"request"},{"_id":"wrk_6f5de43dabca4486bbecfb1dd9a933d2","created":1582921059860,"description":"","modified":1582921059860,"name":"Yelp Fusion","parentId":null,"_type":"workspace"},{"_id":"req_b8a8376add7b4de29f6a5690355c203e","authentication":{},"body":{},"created":1583185569802,"description":"","headers":[{"description":"","id":"pair_c0f929b15584443fae1d908a6e9bbfd2","name":"Authorization","value":"Bearer {{ apiKey  }}"}],"isPrivate":false,"metaSortKey":-1583048704669.5,"method":"GET","modified":1583287757046,"name":"code-challenge reviews","parameters":[],"parentId":"wrk_6f5de43dabca4486bbecfb1dd9a933d2","settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingFollowRedirects":"global","settingRebuildPath":true,"settingSendCookies":true,"settingStoreCookies":true,"url":"{{ localhostUrl  }}/api/business/reviews","_type":"request"},{"_id":"req_72f3521f58c4408391d464a88817541a","authentication":{},"body":{},"created":1582921476034,"description":"","headers":[{"description":"","id":"pair_0233dabc4f2241c7b6bef81e3c506b31","name":"Authorization","value":"Bearer {{ apiKey  }}"}],"isPrivate":false,"metaSortKey":-1582921476034,"method":"GET","modified":1583287796661,"name":"businness","parameters":[{"description":"","id":"pair_e3d4956ac1774ceca7db804eb4933450","name":"location","value":"Alpharetta"},{"description":"","id":"pair_38cb8eb75f9c43eea1e3f5a127c890aa","name":"categories","value":"icecream"},{"description":"","id":"pair_e2b44a0f724c4a6f8f7b49726e8933f1","name":"sort_by","value":"rating"},{"description":"","disabled":false,"id":"pair_7773c9e30feb4944ab34250d7ec5ba53","name":"limit","value":"5"}],"parentId":"wrk_6f5de43dabca4486bbecfb1dd9a933d2","settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingFollowRedirects":"global","settingRebuildPath":true,"settingSendCookies":true,"settingStoreCookies":true,"url":"{{ url  }}/businesses/search","_type":"request"},{"_id":"req_b5290b9f0d9146529698bc588925d714","authentication":{},"body":{},"created":1582921776402,"description":"","headers":[{"description":"","id":"pair_0233dabc4f2241c7b6bef81e3c506b31","name":"Authorization","value":"Bearer {{ apiKey  }}"}],"isPrivate":false,"metaSortKey":-1582911812211,"method":"GET","modified":1583287812789,"name":"reviews","parameters":[],"parentId":"wrk_6f5de43dabca4486bbecfb1dd9a933d2","settingDisableRenderRequestBody":false,"settingEncodeUrl":true,"settingFollowRedirects":"global","settingRebuildPath":true,"settingSendCookies":true,"settingStoreCookies":true,"url":"{{url}}/businesses/{% response 'body', 'req_72f3521f58c4408391d464a88817541a', 'b64::JC5idXNpbmVzc2VzWzBdLmlk::46b', 'never' %}/reviews","_type":"request"},{"_id":"env_46a1fb446c5af724b2705d8ee1b9bd397d1eb640","color":null,"created":1582921059939,"data":{},"dataPropertyOrder":{},"isPrivate":false,"metaSortKey":1582921059939,"modified":1583287734845,"name":"Base Environment","parentId":"wrk_6f5de43dabca4486bbecfb1dd9a933d2","_type":"environment"},{"_id":"jar_46a1fb446c5af724b2705d8ee1b9bd397d1eb640","cookies":[],"created":1582921059942,"modified":1582921059942,"name":"Default Jar","parentId":"wrk_6f5de43dabca4486bbecfb1dd9a933d2","_type":"cookie_jar"},{"_id":"env_73972f29076b4c89bd10224da807a0d4","color":null,"created":1583287607900,"data":{"apiKey":"Z9a7bHducX5Ht-atLUGO7d9XDvrREn2nRtfOiDnjOVds4DfUC8B4KxnCJDrDQNdP3tcp2ppXg679U0cxpLqmAE1KddQ8Br4jTRAdIGhcNYJk0sKhPMydiAxkQnZZXnYx","clientID":"Sd7Q-EFGq8tkNAIV5MiAtg","k8sUrl":"http://191.235.126.29:3333","localhostUrl":"http://localhost:3333","url":"https://api.yelp.com/v3"},"dataPropertyOrder":{"&":["clientID","apiKey","url","localhostUrl","k8sUrl"]},"isPrivate":false,"metaSortKey":1583287607900,"modified":1583289173207,"name":"yelp","parentId":"env_46a1fb446c5af724b2705d8ee1b9bd397d1eb640","_type":"environment"}]}
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2020-03-04T02:33:56.061Z",
+  "__export_source": "insomnia.desktop.app:v7.1.1",
+  "resources": [
+    {
+      "_id": "req_199fb5aca41f4eb799fca4269c56015c",
+      "authentication": {},
+      "body": {},
+      "created": 1583175933305,
+      "description": "",
+      "headers": [
+        {
+          "description": "",
+          "disabled": false,
+          "id": "pair_1d5326884da346b9aafb9a81a7df6473",
+          "name": "Authorization",
+          "value": "Bearer {{ apiKey  }}"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1583175933305,
+      "method": "GET",
+      "modified": 1583289206056,
+      "name": "code-challenge business",
+      "parameters": [],
+      "parentId": "wrk_6f5de43dabca4486bbecfb1dd9a933d2",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ localhostUrl }}/api/business",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_6f5de43dabca4486bbecfb1dd9a933d2",
+      "created": 1582921059860,
+      "description": "",
+      "modified": 1582921059860,
+      "name": "Yelp Fusion",
+      "parentId": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_b8a8376add7b4de29f6a5690355c203e",
+      "authentication": {},
+      "body": {},
+      "created": 1583185569802,
+      "description": "",
+      "headers": [
+        {
+          "description": "",
+          "id": "pair_c0f929b15584443fae1d908a6e9bbfd2",
+          "name": "Authorization",
+          "value": "Bearer {{ apiKey  }}"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1583048704669.5,
+      "method": "GET",
+      "modified": 1583287757046,
+      "name": "code-challenge reviews",
+      "parameters": [],
+      "parentId": "wrk_6f5de43dabca4486bbecfb1dd9a933d2",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ localhostUrl  }}/api/business/reviews",
+      "_type": "request"
+    },
+    {
+      "_id": "req_72f3521f58c4408391d464a88817541a",
+      "authentication": {},
+      "body": {},
+      "created": 1582921476034,
+      "description": "",
+      "headers": [
+        {
+          "description": "",
+          "id": "pair_0233dabc4f2241c7b6bef81e3c506b31",
+          "name": "Authorization",
+          "value": "Bearer {{ apiKey  }}"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1582921476034,
+      "method": "GET",
+      "modified": 1583287796661,
+      "name": "businness",
+      "parameters": [
+        {
+          "description": "",
+          "id": "pair_e3d4956ac1774ceca7db804eb4933450",
+          "name": "location",
+          "value": "Alpharetta"
+        },
+        {
+          "description": "",
+          "id": "pair_38cb8eb75f9c43eea1e3f5a127c890aa",
+          "name": "categories",
+          "value": "icecream"
+        },
+        {
+          "description": "",
+          "id": "pair_e2b44a0f724c4a6f8f7b49726e8933f1",
+          "name": "sort_by",
+          "value": "rating"
+        },
+        {
+          "description": "",
+          "disabled": false,
+          "id": "pair_7773c9e30feb4944ab34250d7ec5ba53",
+          "name": "limit",
+          "value": "5"
+        }
+      ],
+      "parentId": "wrk_6f5de43dabca4486bbecfb1dd9a933d2",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ url  }}/businesses/search",
+      "_type": "request"
+    },
+    {
+      "_id": "req_b5290b9f0d9146529698bc588925d714",
+      "authentication": {},
+      "body": {},
+      "created": 1582921776402,
+      "description": "",
+      "headers": [
+        {
+          "description": "",
+          "id": "pair_0233dabc4f2241c7b6bef81e3c506b31",
+          "name": "Authorization",
+          "value": "Bearer {{ apiKey  }}"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1582911812211,
+      "method": "GET",
+      "modified": 1583287812789,
+      "name": "reviews",
+      "parameters": [],
+      "parentId": "wrk_6f5de43dabca4486bbecfb1dd9a933d2",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{url}}/businesses/{% response 'body', 'req_72f3521f58c4408391d464a88817541a', 'b64::JC5idXNpbmVzc2VzWzBdLmlk::46b', 'never' %}/reviews",
+      "_type": "request"
+    },
+    {
+      "_id": "env_46a1fb446c5af724b2705d8ee1b9bd397d1eb640",
+      "color": null,
+      "created": 1582921059939,
+      "data": {},
+      "dataPropertyOrder": {},
+      "isPrivate": false,
+      "metaSortKey": 1582921059939,
+      "modified": 1583287734845,
+      "name": "Base Environment",
+      "parentId": "wrk_6f5de43dabca4486bbecfb1dd9a933d2",
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_46a1fb446c5af724b2705d8ee1b9bd397d1eb640",
+      "cookies": [],
+      "created": 1582921059942,
+      "modified": 1582921059942,
+      "name": "Default Jar",
+      "parentId": "wrk_6f5de43dabca4486bbecfb1dd9a933d2",
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "env_73972f29076b4c89bd10224da807a0d4",
+      "color": null,
+      "created": 1583287607900,
+      "data": {
+        "apiKey": "Z9a7bHducX5Ht-atLUGO7d9XDvrREn2nRtfOiDnjOVds4DfUC8B4KxnCJDrDQNdP3tcp2ppXg679U0cxpLqmAE1KddQ8Br4jTRAdIGhcNYJk0sKhPMydiAxkQnZZXnYx",
+        "clientID": "Sd7Q-EFGq8tkNAIV5MiAtg",
+        "k8sUrl": "http://191.235.126.29:3333",
+        "localhostUrl": "http://localhost:3333",
+        "url": "https://api.yelp.com/v3"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "clientID",
+          "apiKey",
+          "url",
+          "localhostUrl",
+          "k8sUrl"
+        ]
+      },
+      "isPrivate": false,
+      "metaSortKey": 1583287607900,
+      "modified": 1583289173207,
+      "name": "yelp",
+      "parentId": "env_46a1fb446c5af724b2705d8ee1b9bd397d1eb640",
+      "_type": "environment"
+    }
+  ]
+}

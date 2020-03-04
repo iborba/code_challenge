@@ -3,8 +3,5 @@
     "src"
   ],
   "ext": "ts",
-  "ignore": [
-    "__tests__"
-  ],
   "exec": "ts-node ./src/server.ts"
 }

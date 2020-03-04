@@ -18,8 +18,9 @@ class AppController {
   middlewares() {
     this.express.use(cors())
     this.express.use(express.json())
+    this.express.use(loggerMiddleware)
   }
-
+  
   routes() {
     this.express.use('/api', routes)
   }

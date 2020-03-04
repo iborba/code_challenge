@@ -5,6 +5,7 @@ This project consists in a NodeJs application that gets business and reviews fro
 ***
 
 At this version, the project contains the follow structure
+```
 ├── api_request.json
 ├── docker
 │   └── docker-compose.yml
@@ -37,7 +38,7 @@ At this version, the project contains the follow structure
 │       └── api.ts
 ├── tsconfig.json
 └── tslint.json
-
+```
 And there's two ways to execute this project using containers.
   - Via docker-compose 
     - ```

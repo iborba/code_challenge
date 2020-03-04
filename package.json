@@ -1,25 +1,27 @@
 {
-  "name": "",
-  "version": "0.0.0",
-  "description": "",
-  "main": "build/src/index.js",
-  "types": "build/src/index.d.ts",
+  "name": "code_challenge",
+  "version": "1.0.0",
+  "description": "API to get business reviews from Yelp API",
+  "main": "build/src/app.js",
+  "types": "build/src/apps.d.ts",
   "files": [
     "build/src"
   ],
   "license": "Apache-2.0",
-  "keywords": [],
+  "keywords": [
+    "Alpharetta",
+    "israel.borba",
+    "adp",
+    "express",
+    "yelp"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "check": "gts check",
-    "clean": "gts clean",
     "compile": "tsc -p .",
-    "fix": "gts fix",
     "dev": "nodemon",
     "start": "node app.js",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run check"
+    "docker": "docker build -t israelborba/code_challenge . && docker push israelborba/code_challenge"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

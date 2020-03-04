@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-challenge
+spec:
+  selector:
+    matchLabels:
+      app: code-challenge
+  template:
+    metadata:
+      labels:
+        app: code-challenge
+    spec:
+      containers:
+        - name: code-challenge
+          image: israelborba/code_challenge
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3333
+          env:
+            - name: PORT
+              value: "3333"

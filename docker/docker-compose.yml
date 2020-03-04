@@ -1,0 +1,9 @@
+version: "3"
+services:
+  code_challenge:
+    image: israelborba/code_challenge
+    container_name: code_challenge
+    ports:
+      - 3333:3333
+    environment:
+      - PORT=3333

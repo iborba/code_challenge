@@ -1,38 +1,36 @@
 import { Request, Response, response } from "express";
-import IBusiness from "../interface/controllers/business.interface";
-import IReview from "../interface/controllers/review.interface";
 import { OK, INTERNAL_SERVER_ERROR } from 'http-status-codes'
 import api from '../services/api'
+import IBusiness from "../interface/controllers/business.interface";
+import IReview from "../interface/controllers/review.interface";
+import IBusinessReview from "../interface/controllers/business-review.interface";
 
 class BusinessController {
   private path = 'businesses'
   private headers: object = {}
   private async getBusiness(): Promise<IBusiness[]> {
-    const businessList = await api.get(`/${this.path}/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: this.headers })
+    const businessList = await api.get(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: this.headers })
 
     return businessList.data.businesses.map((data: IBusiness) => {
       return { id: data.id, name: data.name, location: data.location }
     })
   }
 
-  private async getReviews(): Promise<IBusiness[]> {
+  private async getReviews(): Promise<IBusinessReview[]> {
     const businesses = await this.getBusiness()
 
     const targetPromises = businesses.map(async business => {
       const { id, name, location } = business
-      const reviewList = await api.get(`/${this.path}/${id}/reviews`, { headers: this.headers })
+      const reviewList = await api.get(`/businesses/${id}/reviews`, { headers: this.headers })
 
       return {
-        id, name, location, reviews: reviewList.data.reviews.map((review: IReview) => {
-          return { text: review.text, rating: review.rating, user: review.user }
+        id, name, address: location.display_address, reviews: reviewList.data.reviews.map((review: IReview) => {
+          return { text: review.text, rating: review.rating, user: review.user.name }
         })
       }
     });
 
     return Promise.all(targetPromises)
-  }
-  index = (_req: Request, res: Response) => {
-    return res.status(OK).json({ value: "Welcome Business home" });
   }
   business = (req: Request, res: Response) => {
     this.headers = { Authorization: req.headers.authorization }

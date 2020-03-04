@@ -6,9 +6,8 @@ import IReview from "../interface/controllers/review.interface";
 import IBusinessReview from "../interface/controllers/business-review.interface";
 
 class BusinessController {
-  private path = 'businesses'
   private headers: object = {}
-  private async getBusiness(): Promise<IBusiness[]> {
+  async getBusiness(): Promise<IBusiness[]> {
     const businessList = await api.get(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: this.headers })
 
     return businessList.data.businesses.map((data: IBusiness) => {
@@ -16,7 +15,7 @@ class BusinessController {
     })
   }
 
-  private async getReviews(): Promise<IBusinessReview[]> {
+  async getReviews(): Promise<IBusinessReview[]> {
     const businesses = await this.getBusiness()
 
     const targetPromises = businesses.map(async business => {

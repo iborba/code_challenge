@@ -3,18 +3,27 @@ import * as cors from 'cors'
 import { routes } from './routes'
 import { config as dotEnvConfig } from "dotenv";
 import { loggerMiddleware } from './middlewares/loggerMiddleware'
-dotEnvConfig()
 
-const server = express()
-
-server.use(loggerMiddleware)
-server.use(cors())
-server.use(express.json())
-
-server.use('/api', routes)
-
-const port = process.env.PORT || 3333
-
-server.listen(port, () => {
-  console.log(`Server listening at ${port}`)
+dotEnvConfig({
+  path: process.env.NODE_ENV === "test" ? ".env.test" : ".env"
 })
+
+class AppController {
+  express = express()
+  constructor() {
+    this.middlewares()
+    this.routes()
+  }
+
+  middlewares() {
+    this.express.use(cors())
+    this.express.use(express.json())
+  }
+
+  routes() {
+    this.express.use('/api', routes)
+  }
+}
+
+const app = new AppController().express
+export { app }

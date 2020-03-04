@@ -14,3 +14,4 @@ There's two ways to execute this project using containers.
       kubectl apply -f k8s/deployment.yaml
       kubectl apply -f k8s/service.yaml
       ```
+  * You can import the file ./api_request.json to Postman or insomnia and customize your data to test this apis

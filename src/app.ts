@@ -17,6 +17,7 @@ class AppController {
 
   middlewares() {
     this.express.use(cors())
+    this.express.use(loggerMiddleware)
     this.express.use(express.json())
     this.express.use(loggerMiddleware)
   }

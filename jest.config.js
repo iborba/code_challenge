@@ -1,4 +1,3 @@
-
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
@@ -14,7 +13,9 @@ module.exports = {
 
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
-
+  
+  roots: ['<rootDir>'],
+  
   // The test environment that will be used for testing
   testEnvironment: "node",
 
@@ -25,6 +26,6 @@ module.exports = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.ts?$': 'ts-jest',
   }
 };

@@ -1,14 +1,14 @@
 import axiosApi from '../../src/services/api'
-import { businessData } from '../../__mocks__/business-top-5'
+import { mockYelpBusinesses } from '../../__mocks__/yelp business'
 import { yelpBusinessService } from '../../src/services/yelp-business-service'
 
 jest.mock('../../src/services/api')
 const axios = axiosApi as jest.Mocked<typeof axiosApi>;
 
-describe('business service class', () => {
+describe('Yelp Business service class', () => {
   it('should get a list of businesses', async () => {
     // Arrange
-    axios.get.mockImplementationOnce(() => Promise.resolve(businessData))
+    axios.get.mockImplementationOnce(() => Promise.resolve({ data: mockYelpBusinesses }))
 
     // Act
     await yelpBusinessService.getBusiness({})

@@ -1,27 +1,22 @@
 import { Request, Response, response } from "express";
 import { OK, INTERNAL_SERVER_ERROR } from 'http-status-codes'
-import api from '../services/api'
 import IBusiness from "../interface/controllers/business.interface";
 import IReview from "../interface/controllers/review.interface";
 import IBusinessReview from "../interface/controllers/business-review.interface";
-import { AxiosResponse } from "axios";
+import { yelpBusinessService } from '../services/yelp-business-service'
+import IYelpBusiness from "../interface/services/yelp-business.interface";
+import IYelpReview from "../interface/services/yelp-review.interface";
 
 class BusinessController {
   private headers: object = {}
 
-  async externalGetBusiness(): Promise<AxiosResponse> {
-    return await api.get(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: this.headers })
-  }
-
-  async externalGetBusinessReviews(id: string): Promise<AxiosResponse> {
-    return await api.get(`/businesses/${id}/reviews`, { headers: this.headers })
-  }
-
   async getBusiness(): Promise<IBusiness[]> {
-    const businessList = await this.externalGetBusiness()
+    const businessList = await yelpBusinessService.getBusiness(this.headers)
 
-    return businessList.data.businesses.map((data: IBusiness) => {
-      return { id: data.id, name: data.name, location: data.location }
+    return businessList.map(business => {
+      const location = business.location.display_address.join(" ")
+
+      return { id: business.id, name: business.name, location }
     })
   }
 
@@ -30,13 +25,13 @@ class BusinessController {
 
     const targetPromises = businesses.map(async business => {
       const { id, name, location } = business
-      const reviewList = await this.externalGetBusinessReviews(id)
+      const reviewList = await yelpBusinessService.getBusinessReviews(id, this.headers)
 
-      return {
-        id, name, address: location.display_address, reviews: reviewList.data.reviews.map((review: IReview) => {
-          return { text: review.text, rating: review.rating, user: review.user.name }
-        })
-      }
+      const reviews = reviewList.map((review: IYelpReview) => {
+        return { text: review.text, rating: review.rating, user: review.user.name }
+      })
+
+      return { id, name, address: location, reviews }
     });
 
     return Promise.all(targetPromises)

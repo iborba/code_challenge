@@ -1,9 +1,9 @@
-import IUser from "./user.interface";
+import IYelpUser from "../services/yelp-user.interface";
 
 interface IReview {
   text: string
-  rating: string
-  user: IUser
+  rating: number
+  user: string
 }
 
 export default IReview

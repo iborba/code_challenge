@@ -1,18 +1,22 @@
 import { Request, Response, response } from "express";
 import { OK, INTERNAL_SERVER_ERROR } from 'http-status-codes'
-import api from '../services/api'
 import IBusiness from "../interface/controllers/business.interface";
-import IReview from "../interface/controllers/review.interface";
 import IBusinessReview from "../interface/controllers/business-review.interface";
-
+import { yelpBusinessService } from '../services/yelp-business-service'
+import { IYelpReview } from '../../src/interface/services/yelp-review.interface'
 class BusinessController {
   private headers: object = {}
-  async getBusiness(): Promise<IBusiness[]> {
-    const businessList = await api.get(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: this.headers })
 
-    return businessList.data.businesses.map((data: IBusiness) => {
-      return { id: data.id, name: data.name, location: data.location }
+  async getBusiness(): Promise<IBusiness[]> {
+    const businessList = await yelpBusinessService.getBusiness(this.headers)
+
+    const target = businessList.businesses.map(business => {
+      const location = business.location.display_address.join(" ")
+
+      return { id: business.id, name: business.name, location }
     })
+
+    return target
   }
 
   async getReviews(): Promise<IBusinessReview[]> {
@@ -20,32 +24,45 @@ class BusinessController {
 
     const targetPromises = businesses.map(async business => {
       const { id, name, location } = business
-      const reviewList = await api.get(`/businesses/${id}/reviews`, { headers: this.headers })
+      const reviewList = await yelpBusinessService.getBusinessReviews(id, this.headers)
 
-      return {
-        id, name, address: location.display_address, reviews: reviewList.data.reviews.map((review: IReview) => {
-          return { text: review.text, rating: review.rating, user: review.user.name }
-        })
-      }
+      const reviews = reviewList.reviews.map(review => {
+        return { text: review.text, rating: review.rating, user: review.user.name }
+      })
+
+      return { id, name, address: location, reviews }
     });
 
     return Promise.all(targetPromises)
   }
-  business = (req: Request, res: Response) => {
-    this.headers = { Authorization: req.headers.authorization }
+  /*************************************************************************************/
+  /*************************************************************************************/
+  /*************************************************************************************/
+  /*************************************************************************************/
+  business = async (req: Request, res: Response) => {
+    try {
+      this.headers = { Authorization: req.headers.authorization }
+      const data = await this.getBusiness();
 
-    return this.getBusiness()
-      .then(data => res.status(OK).json(data))
-      .catch(error => res.status(INTERNAL_SERVER_ERROR).json(error))
+      return res.status(OK).json(data);
+    }
+    catch (error) {
+      return res.status(INTERNAL_SERVER_ERROR).json(error);
+    }
   }
 
-  reviews = (req: Request, res: Response) => {
-    this.headers = { Authorization: req.headers.authorization }
+  reviews = async (req: Request, res: Response) => {
+    try {
+      this.headers = { Authorization: req.headers.authorization }
+      const data = await this.getReviews();
 
-    return this.getReviews()
-      .then(data => res.status(OK).json(data))
-      .catch(error => res.status(INTERNAL_SERVER_ERROR).json(error))
+      return res.status(OK).json(data);
+    }
+    catch (error) {
+      return res.status(INTERNAL_SERVER_ERROR).json(error);
+    }
   }
 }
+
 const businessController = new BusinessController()
 export { businessController }

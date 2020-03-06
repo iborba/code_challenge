@@ -19,6 +19,7 @@
     "compile": "tsc -p .",
     "dev": "nodemon",
     "test": "NODE_ENV=test jest",
+    "test:watch": "npm run test -- --watch",
     "testCoverage": "NODE_ENV=test jest --collectCoverage=true",
     "start": "node build/src/server.js",
     "docker": "docker build -t israelborba/code_challenge . && docker push israelborba/code_challenge"

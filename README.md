@@ -1,12 +1,13 @@
+# INTRODUCTION
 This project consists in a NodeJs application that gets business and reviews from Yelp Fusion APIs. It was developed in Typescript and has the following endpoints:
 ***
-  GET /api/business
-  GET /api/business/reviews
+  * GET /api/business
+  * GET /api/business/reviews
 ***
 
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Code-Challenge&uri=https%3A%2F%2Fgist.github.com%2Fiborba%2F2e26e20f2b5e100faa709eeaa3394fba)
 
-Tests in this projects are in development using Jest.
+# STRUCTURE
 
 At this version, the project contains the follow structure
 ```
@@ -60,6 +61,8 @@ At this version, the project contains the follow structure
 ├── tsconfig.json
 └── tslint.json
 ```
+# RUNNING
+
 And there's two ways to execute this project using containers.
   - Via docker-compose 
     - ```
@@ -78,3 +81,12 @@ And there's two ways to execute this project using containers.
       $ npm i
       $ npm run dev
       ```
+
+# TESTING
+  To run tests, do the follows
+  - ```
+    #!/bin/bash 
+    $ npm i
+    $ npm run test
+  ```
+

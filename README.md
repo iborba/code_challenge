@@ -86,7 +86,9 @@ And there's two ways to execute this project using containers.
   To run tests, do the follows
   - ```
     #!/bin/bash 
+    # if you didn't installed the libs, please run 
     $ npm i
+    # then
     $ npm run test
   ```
 

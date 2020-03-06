@@ -62,8 +62,10 @@ At this version, the project contains the follow structure
 └── tslint.json
 ```
 # RUNNING
+ * Notice that you must have your own Yelp API Key to access the apis successfully
 
 And there's two ways to execute this project using containers.
+
   - Via docker-compose 
     - ```sh
       #!/bin/bash 

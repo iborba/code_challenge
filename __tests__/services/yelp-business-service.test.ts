@@ -6,6 +6,8 @@ import { yelpBusinessService } from '../../src/services/yelp-business-service'
 jest.mock('../../src/services/api')
 const axios = axiosApi as jest.Mocked<typeof axiosApi>;
 
+// yelpBusinessService['follmann']
+
 describe('Yelp Business service class', () => {
   test('getBusiness should be a function', () => {
     // Assert

@@ -3,7 +3,6 @@ import { OK, INTERNAL_SERVER_ERROR } from 'http-status-codes'
 import IBusiness from "../interface/controllers/business.interface";
 import IBusinessReview from "../interface/controllers/business-review.interface";
 import { yelpBusinessService } from '../services/yelp-business-service'
-import { IYelpReview } from '../../src/interface/services/yelp-review.interface'
 class BusinessController {
   private headers: object = {}
 

@@ -1,7 +1,6 @@
 module.exports = {
   roots: ['<rootDir>'],
   bail: true,
-  clearMocks: true,
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },

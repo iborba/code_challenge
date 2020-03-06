@@ -4,11 +4,21 @@ import api from '../services/api'
 import IBusiness from "../interface/controllers/business.interface";
 import IReview from "../interface/controllers/review.interface";
 import IBusinessReview from "../interface/controllers/business-review.interface";
+import { AxiosResponse } from "axios";
 
 class BusinessController {
   private headers: object = {}
+
+  async externalGetBusiness(): Promise<AxiosResponse> {
+    return await api.get(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: this.headers })
+  }
+
+  async externalGetBusinessReviews(id: string): Promise<AxiosResponse> {
+    return await api.get(`/businesses/${id}/reviews`, { headers: this.headers })
+  }
+
   async getBusiness(): Promise<IBusiness[]> {
-    const businessList = await api.get(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: this.headers })
+    const businessList = await this.externalGetBusiness()
 
     return businessList.data.businesses.map((data: IBusiness) => {
       return { id: data.id, name: data.name, location: data.location }
@@ -20,7 +30,7 @@ class BusinessController {
 
     const targetPromises = businesses.map(async business => {
       const { id, name, location } = business
-      const reviewList = await api.get(`/businesses/${id}/reviews`, { headers: this.headers })
+      const reviewList = await this.externalGetBusinessReviews(id)
 
       return {
         id, name, address: location.display_address, reviews: reviewList.data.reviews.map((review: IReview) => {
@@ -47,5 +57,6 @@ class BusinessController {
       .catch(error => res.status(INTERNAL_SERVER_ERROR).json(error))
   }
 }
+
 const businessController = new BusinessController()
 export { businessController }

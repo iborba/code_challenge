@@ -5,7 +5,7 @@ interface IBusiness {
   id: string
   name: string
   location: ILocation
-  reviews: IReview[]
+  // reviews: IReview[]
 }
 
 export default IBusiness

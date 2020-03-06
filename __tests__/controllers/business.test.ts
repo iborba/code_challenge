@@ -1,25 +1,22 @@
-import * as request from 'superagent'
-import { OK, INTERNAL_SERVER_ERROR, BAD_REQUEST } from 'http-status-codes'
-// import { app } from '../../src/app'
+import { businessController } from '../../src/controllers/business'
+import { mocked } from "ts-jest/dist/util/testing";
+import { businessData } from '../../__mocks__/business-top-5'
+jest.mock('../../src/controllers/business')
 
-describe('business', () => {
-  it('should return Token not supplied', async (done) => {
-    const res = await request.get('/api/business')
-    const message = JSON.parse(res.text).message
-    expect(res.status).toEqual(BAD_REQUEST)
+describe('businessController tests', () => {
+  mocked(businessController.externalGetBusiness).mockResolvedValue(businessData)
+  // mocked(businessController.externalGetBusinessReviews).mockResolvedValue(data)
 
-    expect(message).toEqual('Token not supplied')
+  // TOOD
+  // create a class to get data from external APIs
+  // everything else  
 
-    done()
-  })
+  it('should return an external list of businesses', async () => {
+    const response = await businessController.externalGetBusiness()
 
-  it('should return a list of business', async (done) => {
-    const res = await request.get('/api/business')
-      .auth('Z9a7bHducX5Ht-atLUGO7d9XDvrREn2nRtfOiDnjOVds4DfUC8B4KxnCJDrDQNdP3tcp2ppXg679U0cxpLqmAE1KddQ8Br4jTRAdIGhcNYJk0sKhPMydiAxkQnZZXnYx', { type: 'bearer' })
-      .set('Accept', 'application/json')
-
-    expect(res.status).toEqual(OK)
-
-    done()
+    expect(response).not.toBeNull()
+    expect(response.status).toEqual(200)
+    expect(response.data.businesses.length).toBeGreaterThan(0)
+    expect(response).toEqual(businessData)
   })
 })

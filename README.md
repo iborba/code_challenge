@@ -65,12 +65,12 @@ At this version, the project contains the follow structure
 
 And there's two ways to execute this project using containers.
   - Via docker-compose 
-    - ```
+    - ```sh
       #!/bin/bash 
       $ docker-compose -f docker/docker-compose.yml up -d
       ```
   - Via Kubernetes Cluster 
-    - ```
+    - ```sh
       #!/bin/bash 
       $ kubectl apply -f k8s/deployment.yaml
       $ kubectl apply -f k8s/service.yaml
@@ -84,7 +84,7 @@ And there's two ways to execute this project using containers.
 
 # TESTING
   To run tests, do the follows
-  - ```
+  - ```sh
     #!/bin/bash 
     # if you didn't installed the libs, please run 
     $ npm i

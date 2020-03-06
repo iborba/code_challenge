@@ -8,6 +8,10 @@ class YelpBusinessService {
     return result.data
   }
 
+  // private follmann(surname: string) {
+  //   return surname === 'borba' ? 'israel' : 'jefferson'
+  // }
+
   async getBusinessReviews(id: string, headers: object): Promise<IYelpReview> {
     const result = await axiosApi.get(`/businesses/${id}/reviews`, { headers })
     return result.data

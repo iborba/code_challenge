@@ -3,6 +3,9 @@ This project consists in a NodeJs application that gets business and reviews fro
   GET /api/business
   GET /api/business/reviews
 ***
+
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Code-Challenge&uri=https%3A%2F%2Fgist.github.com%2Fiborba%2F2e26e20f2b5e100faa709eeaa3394fba)
+
 Tests in this projects are in development using Jest.
 
 At this version, the project contains the follow structure
@@ -70,5 +73,9 @@ And there's two ways to execute this project using containers.
       $ kubectl apply -f k8s/service.yaml
       ```
 ***
-  * You can import the file ./api_request.json to Postman or insomnia and customize your data to test this APIs
-***
+To run this project in local mode, plase try as follows:
+  - ```
+    #!/bin/bash 
+    $ npm i
+    $ npm run dev
+    ```

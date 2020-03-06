@@ -1,9 +1,8 @@
 import { Request } from 'jest-express/lib/request'
 import { Response } from 'jest-express/lib/response';
 import { headerValidator } from '../../../src/middlewares/validators/headers'
-import { OK, BAD_REQUEST } from 'http-status-codes'
+import { BAD_REQUEST } from 'http-status-codes'
 import { config as dotEnvConfig } from "dotenv";
-
 
 dotEnvConfig({
   path: ".env.test"

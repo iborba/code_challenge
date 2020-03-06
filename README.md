@@ -72,10 +72,9 @@ And there's two ways to execute this project using containers.
       $ kubectl apply -f k8s/deployment.yaml
       $ kubectl apply -f k8s/service.yaml
       ```
-***
-To run this project in local mode, plase try as follows:
-  - ```
-    #!/bin/bash 
-    $ npm i
-    $ npm run dev
-    ```
+  - Or, to run this project in local mode, plase try as follows:
+    - ```
+      #!/bin/bash 
+      $ npm i
+      $ npm run dev
+      ```

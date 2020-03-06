@@ -1,7 +1,6 @@
 import { mockYelpBusinesses } from '../../__mocks__/yelp business'
 import { mockCodeChallengeBusiness } from '../../__mocks__/code-challenge business'
 import { yelpBusinessService } from '../../src/services/yelp-business-service'
-import { businessController } from '../../src/controllers/business'
 
 jest.mock('../../src/services/yelp-business-service')
 const mocked = yelpBusinessService as jest.Mocked<typeof yelpBusinessService>;

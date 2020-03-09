@@ -6,7 +6,7 @@ import { yelpBusinessService } from '../../src/services/yelp-business-service'
 import { businessController } from '../../src/controllers/business.controller'
 import { mockCodeChallengeBusiness } from '../../__mocks__/code-challenge business'
 import { config as dotEnvConfig } from "dotenv";
-import { OK, INTERNAL_SERVER_ERROR } from 'http-status-codes';
+import { OK } from 'http-status-codes';
 
 dotEnvConfig({
   path: ".env.test"

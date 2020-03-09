@@ -7,7 +7,7 @@ class BusinessService {
     try {
       const headers = { Authorization: req.headers.authorization }
       const businessList = await yelpBusinessService.getBusiness(headers)
-      const data = await businessController.getBusiness({ businesses: [businessList] });
+      const data = await businessController.getBusiness(businessList);
 
       return res.status(OK).json(data);
     }

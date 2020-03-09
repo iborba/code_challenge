@@ -40,7 +40,7 @@ describe('Business service class', () => {
 
   test('should get a list of businesses', async () => {
     // Arrange
-    yelpService.getBusiness.mockImplementationOnce(() => Promise.resolve(mockYelpBusinesses))
+    yelpService.getBusiness.mockImplementationOnce(() => Promise.resolve({ businesses: [mockYelpBusinesses] }))
     businessCtrl.getBusiness.mockImplementationOnce(() => Promise.resolve(mockCodeChallengeBusiness))
 
     // Act

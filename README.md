@@ -1,3 +1,11 @@
+<div align="center">
+
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/iborba/code_challenge/CI/master)
+[![Coverage Status](https://coveralls.io/repos/github/iborba/code_challenge/badge.svg)](https://coveralls.io/github/iborba/code_challenge)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/iborba/code_challenge?label=release)
+
+</div>
+
 # INTRODUCTION
 This project consists in a NodeJs application that gets business and reviews from Yelp Fusion APIs. It was developed in Typescript and has the following endpoints:
 ***
@@ -7,12 +15,10 @@ This project consists in a NodeJs application that gets business and reviews fro
 
 <div align="center">
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/iborba/code_challenge/CI/master)
-[![Coverage Status](https://coveralls.io/repos/github/iborba/code_challenge/badge.svg)](https://coveralls.io/github/iborba/code_challenge)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/iborba/code_challenge?label=release)
-
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Code-Challenge&uri=https%3A%2F%2Fgist.github.com%2Fiborba%2F2e26e20f2b5e100faa709eeaa3394fba) 
+
 </div>
+
 # STRUCTURE
 
 At this version, the project contains the follow structure

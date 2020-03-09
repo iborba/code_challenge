@@ -1,53 +1,71 @@
-import axiosApi from '../../src/services/api'
-import { mockCodeChallengeBusiness } from '../../__mocks__/code-challenge business'
-import { businessService } from '../../src/services/business.service'
-import { Response } from 'jest-express/lib/response';
 import { Request } from 'jest-express/lib/request'
+import { Response } from 'jest-express/lib/response';
+import { mockYelpBusinesses } from '../../__mocks__/yelp business'
+import { businessService } from '../../src/services/business.service'
+import { yelpBusinessService } from '../../src/services/yelp-business-service'
+import { businessController } from '../../src/controllers/business.controller'
+import { mockCodeChallengeBusiness } from '../../__mocks__/code-challenge business'
+import { config as dotEnvConfig } from "dotenv";
+import { OK, INTERNAL_SERVER_ERROR } from 'http-status-codes';
 
-jest.mock('../../src/services/api')
-const axios = axiosApi as jest.Mocked<typeof axiosApi>;
+dotEnvConfig({
+  path: ".env.test"
+})
+
+// jest.mock('express', () => { require('jest-express') })
+jest.mock('../../src/services/yelp-business-service')
+jest.mock('../../src/controllers/business.controller')
+const yelpService = yelpBusinessService as jest.Mocked<typeof yelpBusinessService>;
+const businessCtrl = businessController as jest.Mocked<typeof businessController>;
 
 describe('Business service class', () => {
+  let req: any
+  let res: any
+
+  beforeEach(() => {
+    req = new Request('/', {
+      headers: {
+        'authorization': ''
+      }
+    })
+
+    res = new Response()
+
+    jest.clearAllMocks()
+  })
+
   test('business should be a function', () => {
-    // Assert
     expect(businessService.business).toBeInstanceOf(Function)
   })
 
-  // test('business request must have a token', () => {
-  //   // Arrange
-  //   let req: any
-  //   req = new Request('/my/test', {
-  //     headers: {
-  //       'authorization': ''
-  //     }
-  //   })
+  test('should get a list of businesses', async () => {
+    // Arrange
+    yelpService.getBusiness.mockImplementationOnce(() => Promise.resolve(mockYelpBusinesses))
+    businessCtrl.getBusiness.mockImplementationOnce(() => Promise.resolve(mockCodeChallengeBusiness))
 
-  //   // Assert
-  //   expect(businessService.business).toHaveBeenCalledWith(req.headers)
-  // })
+    // Act
+    await businessService.business(req, res)
 
-  // test('should get a list of businesses', async () => {
-  //   // Arrange
-  //   let req: any
-  //   let res: any
+    // Assert
+    expect(yelpService.getBusiness).toHaveBeenCalledTimes(1)
+    expect(businessCtrl.getBusiness).toHaveBeenCalledTimes(1)
+    expect(res.status).toBeCalledWith(OK)
+    expect(res.json).not.toBeNull()
+  })
 
-  //   req = new Request('/my/test', {
-  //     headers: {
-  //       'authorization': ''
-  //     }
-  //   })
+  test('should catch an error', async () => {
+    // Arrange
+    businessCtrl.getBusiness.mockImplementationOnce(() => { throw new Error('Type mismatch') })
 
-  //   res = new Response()
+    // Act
+    await businessService.business(req, res)
 
+    // Assert
+    expect(yelpService.getBusiness).toBeCalled()
+    expect(yelpService.getBusiness).toBeCalledTimes(1)
+    expect(businessCtrl.getBusiness).toBeCalled()
+    expect(businessCtrl.getBusiness).toHaveBeenCalledTimes(1)
+    expect(res.json).toHaveBeenCalledWith(Error('Type mismatch'))
 
-
-  //   // // axios.get.mockImplementationOnce(() => Promise.resolve({ mockCodeChallengeBusiness }))
-
-  //   // // // Act
-  //   // // await businessService.business(req, res)
-
-  //   // // // Assert
-  //   // // expect(axios.get).toBeCalledTimes(1)
-  //   // // expect(axios.get).toHaveBeenCalledWith(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: {} })
-  // })
+  })
 })

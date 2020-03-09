@@ -7,6 +7,8 @@ This project consists in a NodeJs application that gets business and reviews fro
 
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Code-Challenge&uri=https%3A%2F%2Fgist.github.com%2Fiborba%2F2e26e20f2b5e100faa709eeaa3394fba)
 
+[![Coverage Status](https://coveralls.io/repos/github/iborba/code_challenge/badge.svg)](https://coveralls.io/github/iborba/code_challenge)
+
 # STRUCTURE
 
 At this version, the project contains the follow structure

@@ -26,6 +26,18 @@ describe('Yelp Business service class', () => {
     expect(axios.get).toHaveBeenCalledWith(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: {} })
   })
 
+  test('should return an error', async () => {
+    // Arrange
+    axios.get.mockImplementationOnce(() => { throw new Error('Invalid Header') })
+
+    // Act
+    const t = await yelpBusinessService.getBusiness({})
+
+    // Assert
+    expect(axios.get).toBeCalledTimes(1)
+    expect(t).toEqual(Error('Invalid Header'))
+  })
+
   test('should get a list of business reviews', async () => {
     // Arrange
     const businessId = 'v21jReWx5dd5KuQ0QS6Dog'
@@ -38,5 +50,17 @@ describe('Yelp Business service class', () => {
     expect(axios.get).toBeCalledTimes(1)
     expect(axios.get).toHaveBeenCalledWith(`/businesses/${businessId}/reviews`, { headers: {} })
     expect(result.reviews.length).toBeGreaterThan(0)
+  })
+
+  test('should return an error', async () => {
+    // Arrange
+    axios.get.mockImplementationOnce(() => { throw new Error('Invalid Header') })
+
+    // Act
+    const t = await yelpBusinessService.getBusinessReviews('-1', {})
+
+    // Assert
+    expect(axios.get).toBeCalledTimes(1)
+    expect(t).toEqual(Error('Invalid Header'))
   })
 })

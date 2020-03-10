@@ -23,7 +23,7 @@
     "test:watch": "npm run test -- --watch",
     "test:coverage": "NODE_ENV=test jest --collectCoverage=true",
     "start": "node build/src/server.js",
-    "docker": "docker build -t israelborba/code_challenge . && docker push israelborba/code_challenge"
+    "docker": "docker build -t israelborba/code_challenge:v1 . && docker push israelborba/code_challenge:v1"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",

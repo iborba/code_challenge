@@ -1,4 +1,4 @@
-import IYelpUser from "./yelp-user.interface";
+import { IYelpUser } from "./yelp-user.interface";
 
 export interface IYelpReview {
   reviews: [{
@@ -10,5 +10,3 @@ export interface IYelpReview {
     user: IYelpUser
   }]
 }
-
-export default IYelpReview

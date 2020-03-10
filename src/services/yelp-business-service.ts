@@ -1,7 +1,6 @@
-import axiosApi from "./api"
-import IYelpReview from "../interface/services/yelp-review.interface"
-import IYelpBusiness from "../interface/services/yelp-business.interface"
-import IYelpBusinesess from "../interface/services/yelp-businesses.interface"
+import { axiosApi } from "./api"
+import { IYelpReview } from "../interface/services/yelp-review.interface"
+import { IYelpBusinesess } from "../interface/services/yelp-businesses.interface"
 class YelpBusinessService {
   async getBusiness(headers: object): Promise<IYelpBusinesess> {
     try {

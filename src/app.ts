@@ -8,7 +8,7 @@ dotEnvConfig({
   path: process.env.NODE_ENV === "test" ? ".env.test" : ".env"
 })
 
-class AppController {
+export class AppController {
   express = express()
   constructor() {
     this.middlewares()
@@ -20,11 +20,8 @@ class AppController {
     this.express.use(loggerMiddleware)
     this.express.use(express.json())
   }
-  
+
   routes() {
     this.express.use('/api', routes)
   }
 }
-
-const app = new AppController().express
-export { app }

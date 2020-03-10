@@ -17,23 +17,22 @@ jest.mock('../../src/services/yelp-business-service')
 jest.mock('../../src/controllers/business.controller')
 const yelpService = yelpBusinessService as jest.Mocked<typeof yelpBusinessService>;
 const businessCtrl = businessController as jest.Mocked<typeof businessController>;
+let req: any
+let res: any
 
-describe('Business service class', () => {
-  let req: any
-  let res: any
-
-  beforeEach(() => {
-    req = new Request('/', {
-      headers: {
-        'authorization': ''
-      }
-    })
-
-    res = new Response()
-
-    jest.clearAllMocks()
+beforeEach(() => {
+  req = new Request('/', {
+    headers: {
+      'authorization': ''
+    }
   })
 
+  res = new Response()
+
+  jest.clearAllMocks()
+})
+
+describe('Happy path', () => {
   test('business should be a function', () => {
     expect(businessService.business).toBeInstanceOf(Function)
   })
@@ -53,6 +52,9 @@ describe('Business service class', () => {
     expect(res.json).not.toBeNull()
   })
 
+})
+
+describe('Unhappy path', () => {
   test('should catch an error', async () => {
     // Arrange
     businessCtrl.getBusiness.mockImplementationOnce(() => { throw new Error('Type mismatch') })
@@ -66,6 +68,5 @@ describe('Business service class', () => {
     expect(businessCtrl.getBusiness).toBeCalled()
     expect(businessCtrl.getBusiness).toHaveBeenCalledTimes(1)
     expect(res.json).toHaveBeenCalledWith(Error('Type mismatch'))
-
   })
 })

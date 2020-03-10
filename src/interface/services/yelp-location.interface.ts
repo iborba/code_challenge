@@ -1,4 +1,4 @@
-interface IYelpLocation {
+export interface IYelpLocation {
   address1: string;
   address2: string;
   address3: string | null;
@@ -8,5 +8,3 @@ interface IYelpLocation {
   state: string;
   display_address: string[];
 }
-
-export default IYelpLocation;

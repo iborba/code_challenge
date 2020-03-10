@@ -1,15 +1,19 @@
 import { Request, Response } from "express";
 import { OK, INTERNAL_SERVER_ERROR } from 'http-status-codes'
-import { businessController } from '../controllers/business.controller'
-import { businessReviewsController } from '../controllers/business-reviews.controller'
+import { BusinessController } from '../controllers/business.controller'
+import { BusinessReviewsController } from '../controllers/business-reviews.controller'
 import { yelpBusinessService } from './yelp-business-service'
-class BusinessReviewsService {
+export class BusinessReviewsService {
+  businessController = new BusinessController()
+  businessReviewsController = new BusinessReviewsController()
+
   reviews = async (req: Request, res: Response) => {
     try {
+
       const headers = { Authorization: req.headers.authorization }
       const businessList = await yelpBusinessService.getBusiness(headers)
-      const businesses = await businessController.getBusiness(businessList)
-      const reviews = await businessReviewsController.getReviews(businesses, headers);
+      const businesses = await this.businessController.getBusiness(businessList)
+      const reviews = await this.businessReviewsController.getReviews(businesses, headers);
 
       return res.status(OK).json(reviews);
     }
@@ -18,6 +22,3 @@ class BusinessReviewsService {
     }
   }
 }
-
-const businessReviewsService = new BusinessReviewsService()
-export { businessReviewsService }

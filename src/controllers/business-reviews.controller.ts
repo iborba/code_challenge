@@ -1,7 +1,7 @@
-import IBusinessReview from "../interface/controllers/business-review.interface";
+import { IBusinessReview } from "../interface/controllers/business-review.interface";
 import { yelpBusinessService } from '../services/yelp-business-service'
-import IBusiness from "../interface/controllers/business.interface";
-class BusinessReviewsController {
+import { IBusiness } from "../interface/controllers/business.interface";
+export class BusinessReviewsController {
   async getReviews(businesses: IBusiness[], headers: object): Promise<IBusinessReview[]> {
     try {
       const targetPromises = businesses.map(async business => {
@@ -19,9 +19,5 @@ class BusinessReviewsController {
     } catch (error) {
       return error
     }
-
   }
 }
-
-const businessReviewsController = new BusinessReviewsController()
-export { businessReviewsController }

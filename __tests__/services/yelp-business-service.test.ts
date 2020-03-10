@@ -2,11 +2,9 @@ import axiosApi from '../../src/services/api'
 import { mockYelpBusinesses } from '../../__mocks__/yelp business'
 import { mockYelpReviews } from '../../__mocks__/yelp reviews'
 import { yelpBusinessService } from '../../src/services/yelp-business-service'
-
+import { INTERNAL_SERVER_ERROR } from 'http-status-codes'
 jest.mock('../../src/services/api')
 const axios = axiosApi as jest.Mocked<typeof axiosApi>;
-
-// yelpBusinessService['follmann']
 
 describe('Yelp Business service class', () => {
   test('getBusiness should be a function', () => {
@@ -19,23 +17,24 @@ describe('Yelp Business service class', () => {
     axios.get.mockImplementationOnce(() => Promise.resolve({ data: mockYelpBusinesses }))
 
     // Act
-    await yelpBusinessService.getBusiness({})
+    const result = await yelpBusinessService.getBusiness({})
 
     // Assert
     expect(axios.get).toBeCalledTimes(1)
     expect(axios.get).toHaveBeenCalledWith(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: {} })
+    expect(result).toHaveProperty('id', 'v21jReWx5dd5KuQ0QS6Dog')
   })
 
   test('should return an error', async () => {
     // Arrange
-    axios.get.mockImplementationOnce(() => { throw new Error('Invalid Header') })
+    axios.get.mockImplementationOnce(() => { throw new Error(INTERNAL_SERVER_ERROR.toString()) })
 
     // Act
     const t = await yelpBusinessService.getBusiness({})
 
     // Assert
     expect(axios.get).toBeCalledTimes(1)
-    expect(t).toEqual(Error('Invalid Header'))
+    expect(t).toEqual(Error(INTERNAL_SERVER_ERROR.toString()))
   })
 
   test('should get a list of business reviews', async () => {
@@ -54,13 +53,13 @@ describe('Yelp Business service class', () => {
 
   test('should return an error', async () => {
     // Arrange
-    axios.get.mockImplementationOnce(() => { throw new Error('Invalid Header') })
+    axios.get.mockImplementationOnce(() => { throw new Error(INTERNAL_SERVER_ERROR.toString()) })
 
     // Act
-    const t = await yelpBusinessService.getBusinessReviews('-1', {})
+    const result = await yelpBusinessService.getBusinessReviews('-1', {})
 
     // Assert
     expect(axios.get).toBeCalledTimes(1)
-    expect(t).toEqual(Error('Invalid Header'))
+    expect(result).toEqual(Error(INTERNAL_SERVER_ERROR.toString()))
   })
 })

@@ -6,7 +6,6 @@ class YelpBusinessService {
   async getBusiness(headers: object): Promise<IYelpBusinesess> {
     try {
       const result = await axiosApi.get(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers })
-
       return result.data
     } catch (error) {
       return error

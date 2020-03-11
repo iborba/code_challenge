@@ -1,4 +1,4 @@
-import axiosApi from '../../src/services/api'
+import { axiosApi } from '../../src/services/api'
 import { mockYelpBusinesses } from '../../__mocks__/yelp business'
 import { mockYelpReviews } from '../../__mocks__/yelp reviews'
 import { yelpBusinessService } from '../../src/services/yelp-business-service'

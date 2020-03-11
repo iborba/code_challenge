@@ -1,7 +1,9 @@
 import { AppController } from './app'
 const port = process.env.PORT || 3333
-const app = new AppController().express
+const app = new AppController()
 
-app.listen(port, () => {
+app.start()
+
+app.express.listen(port, () => {
   console.log(`Server listening at ${port}`)
 })

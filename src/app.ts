@@ -10,10 +10,6 @@ dotEnvConfig({
 
 export class AppController {
   express = express()
-  constructor() {
-    this.middlewares()
-    this.routes()
-  }
 
   middlewares() {
     this.express.use(cors())
@@ -23,5 +19,10 @@ export class AppController {
 
   routes() {
     this.express.use('/api', routes)
+  }
+
+  start() {
+    this.middlewares()
+    this.routes()
   }
 }

@@ -1,12 +1,14 @@
 import { axiosApi } from '../../src/services/api'
 import { mockYelpBusinesses } from '../../__mocks__/yelp business'
 import { mockYelpReviews } from '../../__mocks__/yelp reviews'
-import { yelpBusinessService } from '../../src/services/yelp-business-service'
+import { YelpBusinessService } from '../../src/services/yelp-business-service'
 import { INTERNAL_SERVER_ERROR } from 'http-status-codes'
 jest.mock('../../src/services/api')
 const axios = axiosApi as jest.Mocked<typeof axiosApi>;
 
 describe('Yelp Business service class', () => {
+  const yelpBusinessService = new YelpBusinessService()
+  
   test('getBusiness should be a function', () => {
     // Assert
     expect(yelpBusinessService.getBusiness).toBeInstanceOf(Function)

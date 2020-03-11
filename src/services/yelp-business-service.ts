@@ -1,7 +1,7 @@
 import { axiosApi } from "./api"
 import { IYelpReview } from "../interface/services/yelp-review.interface"
 import { IYelpBusinesess } from "../interface/services/yelp-businesses.interface"
-class YelpBusinessService {
+export class YelpBusinessService {
   async getBusiness(headers: object): Promise<IYelpBusinesess> {
     try {
       const result = await axiosApi.get(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers })
@@ -20,6 +20,3 @@ class YelpBusinessService {
     }
   }
 }
-
-const yelpBusinessService = new YelpBusinessService()
-export { yelpBusinessService }

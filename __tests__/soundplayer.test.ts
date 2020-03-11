@@ -18,8 +18,6 @@ describe('Happy path', () => {
 
     const response = consumer.playSomethingCool()
 
-    console.log('lll', response)
-
     expect(mockedClass).toHaveBeenCalled()
     expect(mockedClass).toHaveBeenCalledTimes(1)
   })

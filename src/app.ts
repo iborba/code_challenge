@@ -1,6 +1,6 @@
 import * as express from 'express'
 import * as cors from 'cors'
-import { routes } from './routes'
+import { Routes } from './routes'
 import { config as dotEnvConfig } from "dotenv";
 import { loggerMiddleware } from './middlewares/loggerMiddleware'
 
@@ -9,7 +9,11 @@ dotEnvConfig({
 })
 
 export class AppController {
-  express = express()
+  express: any
+
+  constructor(){
+    this.express = express()
+  }
 
   middlewares() {
     this.express.use(cors())
@@ -18,7 +22,7 @@ export class AppController {
   }
 
   routes() {
-    this.express.use('/api', routes)
+    this.express.use('/api', new Routes().routes)
   }
 
   start() {

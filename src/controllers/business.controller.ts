@@ -1,11 +1,8 @@
 import { IBusiness } from "../interface/controllers/business.interface";
-import { IYelpBusinesess } from "../interface/services/yelp-businesses.interface";
+import { IYelpBusiness } from "../interface/services/yelp-business.interface";
 export class BusinessController {
-  async getBusiness(businessList: IYelpBusinesess): Promise<IBusiness[]> {
-    if (businessList.businesses.length === 0)
-      return []
-
-    const target = businessList.businesses.map(business => {
+  async getBusiness(businessList: IYelpBusiness[]): Promise<IBusiness[]> {
+    const target = businessList.map(business => {
       const location = business.location.display_address.join(" ")
 
       return { id: business.id, name: business.name, location }

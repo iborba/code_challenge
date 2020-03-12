@@ -1,7 +1,6 @@
 import { IYelpLocation } from "./yelp-location.interface";
 
 export interface IYelpBusiness {
-
   id: string
   alias: string
   name: string

@@ -10,6 +10,7 @@ import { BusinessReviewsService } from '../../src/services/business-reviews.serv
 import { mockCodeChallengeBusiness } from '../../__mocks__/code-challenge business'
 import { mockCodeChallengeReviews } from '../../__mocks__/code-challenge reviews'
 import { mockYelpBusinesses } from '../../__mocks__/yelp business'
+import { mockYelpReviews } from '../../__mocks__/yelp reviews'
 import { OK } from 'http-status-codes';
 
 dotEnvConfig({
@@ -52,7 +53,21 @@ describe('Happy Path', () => {
     mockedYelpBusinessService.mockImplementation(() => {
       return {
         getBusiness: jest.fn(() => Promise.resolve({ businesses: [mockYelpBusinesses] })),
-        getBusinessReviews: jest.fn(() => Promise.resolve(undefined))
+        getBusinessReviews: jest.fn(() => Promise.resolve({
+          "reviews": [{
+            "id": "jb8X0WoJYoADYfwuWDtbvg",
+            "url": "https://www.yelp.com/biz/screamn-nuts-alpharetta?adjust_creative=Sd7Q-EFGq8tkNAIV5MiAtg&hrid=jb8X0WoJYoADYfwuWDtbvg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_reviews&utm_source=Sd7Q-EFGq8tkNAIV5MiAtg",
+            "text": "Delicious gourmet donuts!  Highly Recommend! \nBread donut pudding and delicious homemade ice cream! Yum! \n\nUnbelievable customer service! They made fresh...",
+            "rating": 5,
+            "time_created": "2020-02-06 17:31:44",
+            "user": {
+              "id": "OEYkt2w7kWoINuKRRyLfRA",
+              "profile_url": "https://www.yelp.com/user_details?userid=OEYkt2w7kWoINuKRRyLfRA",
+              "image_url": "https://s3-media3.fl.yelpcdn.com/photo/JJHsJgjjL_NeVdw3LmZ7Cg/o.jpg",
+              "name": "Stacey S."
+            }
+          }]
+        }))
       }
     })
     mockedBusinessController.mockImplementation(() => {
@@ -68,7 +83,5 @@ describe('Happy Path', () => {
 
     // Act
     const result = await businessReviewsService.reviews(req, res)
-
-    console.log(result)
   })
 })

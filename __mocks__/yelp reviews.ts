@@ -39,9 +39,5 @@ export const mockYelpReviews = {
         "name": "Adam W."
       }
     }
-  ],
-  "total": 309,
-  "possible_languages": [
-    "en"
   ]
 }

@@ -6,15 +6,14 @@ import { INTERNAL_SERVER_ERROR } from 'http-status-codes'
 jest.mock('../../src/services/api')
 const axios = axiosApi as jest.Mocked<typeof axiosApi>;
 
-describe('Yelp Business service class', () => {
-  const yelpBusinessService = new YelpBusinessService()
-  
-  test('getBusiness should be a function', () => {
-    // Assert
-    expect(yelpBusinessService.getBusiness).toBeInstanceOf(Function)
-  })
+beforeEach(() => {
+  jest.clearAllMocks()
+})
 
-  test('should get a list of businesses', async () => {
+describe('Happy Path', () => {
+  const yelpBusinessService = new YelpBusinessService()
+
+  it('should get a list of businesses', async () => {
     // Arrange
     axios.get.mockImplementationOnce(() => Promise.resolve({ data: mockYelpBusinesses }))
 
@@ -24,19 +23,27 @@ describe('Yelp Business service class', () => {
     // Assert
     expect(axios.get).toBeCalledTimes(1)
     expect(axios.get).toHaveBeenCalledWith(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: {} })
-    expect(result).toHaveProperty('id', 'v21jReWx5dd5KuQ0QS6Dog')
+    expect(typeof result).toBe('object')
+    expect(typeof result.businesses).toBe('object')
+    expect(result.businesses.length).toBeGreaterThan(0)
+    result.businesses.map(r => {
+      expect(r).toHaveProperty('id', 'v21jReWx5dd5KuQ0QS6Dog')
+    })
   })
 
-  test('should return an error', async () => {
+  it('should get an empty list of businesses', async () => {
     // Arrange
-    axios.get.mockImplementationOnce(() => { throw new Error(INTERNAL_SERVER_ERROR.toString()) })
+    axios.get.mockImplementationOnce(() => Promise.resolve({ data: undefined }))
 
     // Act
-    const t = await yelpBusinessService.getBusiness({})
-
+    const result = await yelpBusinessService.getBusiness({})
+    console.log(result)
     // Assert
     expect(axios.get).toBeCalledTimes(1)
-    expect(t).toEqual(Error(INTERNAL_SERVER_ERROR.toString()))
+    expect(axios.get).toHaveBeenCalledWith(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: {} })
+    expect(typeof result).toBe('object')
+    expect(typeof result.businesses).toBe('object')
+    expect(result.businesses.length).toBeGreaterThan(1)
   })
 
   test('should get a list of business reviews', async () => {

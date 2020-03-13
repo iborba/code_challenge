@@ -11,7 +11,7 @@ dotEnvConfig({
 export class AppController {
   express: any
 
-  constructor(){
+  constructor() {
     this.express = express()
   }
 

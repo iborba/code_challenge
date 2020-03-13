@@ -6,15 +6,15 @@ export class BusinessReviewsController {
   async getReviews(businesses: IBusiness[], headers: IncomingHttpHeaders): Promise<IBusinessReview[]> {
     try {
       const yelpReviewsService = new YelpReviewService()
-
+      
       const targetPromises = businesses.map(async business => {
         const { id, name, location } = business
         const reviewList = await yelpReviewsService.getBusinessReviews(id, headers)
-
-        const reviews = reviewList.reviews.map((review: any) => {
+        
+        const reviews = reviewList.map((review: any) => {
           return { text: review.text, rating: review.rating, user: review.user.name }
         })
-
+        
         return { id, name, address: location, reviews }
       });
 

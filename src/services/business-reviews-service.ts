@@ -14,8 +14,8 @@ export class BusinessReviewsService {
       const yelpBusinessService = new YelpBusinessService()
       const businessController = new BusinessController()
       const businessReviewsController = new BusinessReviewsController()
-
-      const headers = { Authorization: req.headers.authorization }
+      
+      const headers = { authorization: req.headers.authorization }
       const businessList = await yelpBusinessService.getBusiness(headers)
       const businesses = await businessController.getBusiness(businessList)
       const reviews = await businessReviewsController.getReviews(businesses, headers);

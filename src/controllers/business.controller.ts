@@ -4,7 +4,7 @@ export class BusinessController {
   async getBusiness(businessList: IYelpBusiness[]): Promise<IBusiness[]> {
     const target = businessList.map(business => {
       const location = business.location.display_address.join(" ")
-
+      
       return { id: business.id, name: business.name, location }
     })
 

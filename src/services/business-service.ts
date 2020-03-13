@@ -15,7 +15,7 @@ export class BusinessService {
 
       const businessList = await yelpBusinessService.getBusiness(req.headers)
       const data = await businessController.getBusiness(businessList);
-      
+
       return res.status(OK).json(data)
     }
     catch (error) {

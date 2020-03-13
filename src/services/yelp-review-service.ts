@@ -10,9 +10,9 @@ export class YelpReviewService {
       if (!businessId)
         throw new Error(error_one_or_more_params_invalid)
 
-      const result = await axiosApi.get(`/businesses/${businessId}/reviews`, { headers })
-
-      return result
+      const { authorization } = headers
+      const result = await axiosApi.get(`/businesses/${businessId}/reviews`, { headers: { authorization } })
+      return result.data.reviews
     } catch (error) {
       return error
     }

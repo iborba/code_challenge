@@ -1,6 +1,12 @@
 {
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    // "paths": {
+    //   "@app/*": [
+    //     "src/*"
+    //   ]
+    // },
     "target": "ES2018",
     "module": "CommonJS",
     "rootDir": ".",
@@ -21,5 +27,5 @@
   "exclude": [
     "node_modules",
     "**/*.spec.ts"
-  ]
+  ],
 }

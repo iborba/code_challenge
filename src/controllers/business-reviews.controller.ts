@@ -1,14 +1,17 @@
-import IBusinessReview from "../interface/controllers/business-review.interface";
-import { yelpBusinessService } from '../services/yelp-business-service'
-import IBusiness from "../interface/controllers/business.interface";
-class BusinessReviewsController {
-  async getReviews(businesses: IBusiness[], headers: object): Promise<IBusinessReview[]> {
+import { IBusinessReview } from "../interface/controllers/business-review.interface";
+import { YelpReviewService } from '../services/yelp-review-service'
+import { IBusiness } from "../interface/controllers/business.interface";
+import { IncomingHttpHeaders } from "http";
+export class BusinessReviewsController {
+  async getReviews(businesses: IBusiness[], headers: IncomingHttpHeaders): Promise<IBusinessReview[]> {
     try {
+      const yelpReviewsService = new YelpReviewService()
+
       const targetPromises = businesses.map(async business => {
         const { id, name, location } = business
-        const reviewList = await yelpBusinessService.getBusinessReviews(id, headers)
+        const reviewList = await yelpReviewsService.getBusinessReviews(id, headers)
 
-        const reviews = reviewList.reviews.map(review => {
+        const reviews = reviewList.reviews.map((review: any) => {
           return { text: review.text, rating: review.rating, user: review.user.name }
         })
 
@@ -19,9 +22,5 @@ class BusinessReviewsController {
     } catch (error) {
       return error
     }
-
   }
 }
-
-const businessReviewsController = new BusinessReviewsController()
-export { businessReviewsController }

@@ -1,7 +1,6 @@
-import IYelpLocation from "./yelp-location.interface";
+import { IYelpLocation } from "./yelp-location.interface";
 
 export interface IYelpBusiness {
-
   id: string
   alias: string
   name: string
@@ -22,5 +21,3 @@ export interface IYelpBusiness {
   display_phone: string,
   distance: number
 }
-
-export default IYelpBusiness

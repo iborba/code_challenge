@@ -1,6 +1,6 @@
 import * as express from 'express'
 import * as cors from 'cors'
-import { routes } from './routes'
+import { Routes } from './routes'
 import { config as dotEnvConfig } from "dotenv";
 import { loggerMiddleware } from './middlewares/loggerMiddleware'
 
@@ -8,11 +8,11 @@ dotEnvConfig({
   path: process.env.NODE_ENV === "test" ? ".env.test" : ".env"
 })
 
-class AppController {
-  express = express()
-  constructor() {
-    this.middlewares()
-    this.routes()
+export class AppController {
+  express: any
+
+  constructor(){
+    this.express = express()
   }
 
   middlewares() {
@@ -20,11 +20,13 @@ class AppController {
     this.express.use(loggerMiddleware)
     this.express.use(express.json())
   }
-  
+
   routes() {
-    this.express.use('/api', routes)
+    this.express.use('/api', new Routes().routes)
+  }
+
+  start() {
+    this.middlewares()
+    this.routes()
   }
 }
-
-const app = new AppController().express
-export { app }

@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express'
-import { BusinessService } from './services/business.service'
-import { BusinessReviewsService } from './services/business-reviews.service'
+import { BusinessService } from './services/business-service'
+import { BusinessReviewsService } from './services/business-reviews-service'
 import { OK } from 'http-status-codes'
 import { headerValidator } from './middlewares/validators/headers'
 

@@ -1,11 +1,4 @@
-import { axiosApi } from '../../src/services/api'
-import { YelpBusinessService } from '../../src/services/yelp-business-service'
-import { IncomingHttpHeaders } from 'http';
-import { error_no_token_provided } from '../../src/config/messages';
-jest.mock('../../src/services/api')
-const axios = axiosApi as jest.Mocked<typeof axiosApi>;
-
-let targetTest = new YelpBusinessService()
+import { BusinessController } from '../../src/controllers/business-controller'
 const data = {
   businesses: [
     {
@@ -108,56 +101,31 @@ const data = {
   ]
 }
 
-beforeEach(() => {
-  jest.clearAllMocks()
-  targetTest = new YelpBusinessService()
-})
-
 describe('Happy path', () => {
-  const headers: IncomingHttpHeaders = { authorization: 'Bearer um_token_qualquer' }
+  it('sould return a list of resumed businesses', async () => {
+    const controller = new BusinessController()
 
-  it('should return a list of businesses', async () => {
-    // Arrange
-    axios.get.mockImplementationOnce(() => Promise.resolve({ data }))
+    const result = await controller.getBusiness(data.businesses)
 
-    // Act
-    const result = await targetTest.getBusiness(headers)
-
-    // Assert
-    expect(axios.get).toHaveBeenCalled()
-    expect(axios.get).toHaveBeenCalledTimes(1)
-    expect(axios.get).toHaveBeenCalledWith(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers })
-    expect(result).toEqual(data.businesses)
+    expect(result).not.toBeNull()
     expect(typeof result).toEqual('object')
+    expect(result.length).toBeGreaterThan(0)
+
+    result.map(b => {
+      expect(b).toHaveProperty(['id'])
+      expect(b).toHaveProperty(['name'])
+      expect(b).toHaveProperty(['location'])
+    })
   })
 
-  it('should return an empty list of businesses', async () => {
-    // Arrange
-    axios.get.mockImplementationOnce(() => Promise.resolve([]))
+  it('should return an empty array when receive an emtpy input', async () => {
+    const controller = new BusinessController()
 
-    // Act
-    const result = await targetTest.getBusiness(headers)
+    const result = await controller.getBusiness([])
 
-    // Assert
-    expect(axios.get).toHaveBeenCalled()
-    expect(axios.get).toHaveBeenCalledTimes(1)
-    expect(axios.get).toHaveBeenCalledWith(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers })
+    expect(result).not.toBeNull()
+    expect(typeof result).toEqual('object')
+    expect(result.length).toEqual(0)
     expect(result).toEqual([])
-    expect(typeof result).toEqual('object')
-  })
-})
-
-describe('Unhappy path', () => {
-  const headers: IncomingHttpHeaders = { authorization: '' }
-
-  it('should not request data if no token was provided', async () => {
-    // Act
-    const result = await targetTest.getBusiness(headers)
-
-    // Assert
-    expect(axios.get).not.toHaveBeenCalled()
-    expect(axios.get).toHaveBeenCalledTimes(0)
-    expect(Error).toBeTruthy()
-    expect(result.message).toEqual(error_no_token_provided)
   })
 })

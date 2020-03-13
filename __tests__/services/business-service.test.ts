@@ -2,11 +2,11 @@ import { Request } from 'jest-express/lib/request'
 import { Response } from 'jest-express/lib/response';
 import { BusinessService } from '../../src/services/business-service'
 import { YelpBusinessService } from '../../src/services/yelp-business-service'
-import { BusinessController } from '../../src/controllers/business.controller'
+import { BusinessController } from '../../src/controllers/business-controller'
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status-codes'
 
 jest.mock('../../src/services/yelp-business-service')
-jest.mock('../../src/controllers/business.controller')
+jest.mock('../../src/controllers/business-controller')
 
 const mockedYelpBusinessService = <jest.Mock<YelpBusinessService>>YelpBusinessService
 const mockedBusinessController = <jest.Mock<BusinessController>>BusinessController

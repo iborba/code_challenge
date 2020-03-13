@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { OK, INTERNAL_SERVER_ERROR } from 'http-status-codes'
-import { BusinessController } from '../controllers/business.controller'
-import { BusinessReviewsController } from '../controllers/business-reviews.controller'
+import { BusinessController } from '../controllers/business-controller'
+import { BusinessReviewsController } from '../controllers/business-reviews-controller'
 import { YelpBusinessService } from './yelp-business-service'
 import { error_no_token_provided } from '../config/messages'
 

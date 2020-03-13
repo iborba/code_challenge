@@ -12,6 +12,10 @@ export class YelpReviewService {
 
       const { authorization } = headers
       const result = await axiosApi.get(`/businesses/${businessId}/reviews`, { headers: { authorization } })
+
+      if (!result.data)
+        return []
+        
       return result.data.reviews
     } catch (error) {
       return error

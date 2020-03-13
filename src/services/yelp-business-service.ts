@@ -12,6 +12,9 @@ export class YelpBusinessService {
       const { authorization } = headers
       const result = await axiosApi.get(`/businesses/search?location=Alpharetta&categories=icecream&sort_by=rating&limit=5`, { headers: { authorization } })
 
+      if (!result.data)
+        return []
+
       return result.data.businesses
     } catch (error) {
       return error

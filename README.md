@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/iborba/code_challenge/badge.svg)](https://coveralls.io/github/iborba/code_challenge)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/iborba/code_challenge?label=release)
 ![CI](https://github.com/iborba/code_challenge/workflows/CI/badge.svg)
-![docker hub](https://github.com/iborba/code_challenge/workflows/DOCKER%20HUB/badge.svg?branch=master)
+![docker hub](https://github.com/iborba/code_challenge/workflows/docker%20hub/badge.svg?branch=master)
 
 </div>
 
@@ -34,11 +34,6 @@ At this version, the project contains the follow structure
 ├── k8s
 │   ├── deployment.yaml
 │   └── service.yaml
-├── __mocks__
-│   ├── code-challenge business.ts
-│   ├── code-challenge reviews.ts
-│   ├── yelp business.ts
-│   └── yelp reviews.ts
 ├── nodemon.json
 ├── package.json
 ├── package-lock.json
@@ -46,8 +41,11 @@ At this version, the project contains the follow structure
 ├── README.md
 ├── src
 │   ├── app.ts
+│   ├── config
+│   │   └── messages.ts
 │   ├── controllers
-│   │   └── business.ts
+│   │   ├── business.controller.ts
+│   │   └── business-reviews.controller.ts
 │   ├── interface
 │   │   ├── controllers
 │   │   │   ├── business.interface.ts
@@ -66,12 +64,20 @@ At this version, the project contains the follow structure
 │   ├── server.ts
 │   └── services
 │       ├── api.ts
-│       └── yelp-business-service.ts
+│       ├── business-reviews-service.ts
+│       ├── business-service.ts
+│       ├── yelp-business-service.ts
+│       └── yelp-review-service.ts
 ├── __tests__
-│   ├── controllers
-│   │   └── business-controller.test.ts
+│   ├── middlewares
+│   │   ├── loggerMiddleware.test.ts
+│   │   └── validators
+│   │       └── headers.test.ts
 │   └── services
-│       └── yelp-business-service.test.ts
+│       ├── business-reviews-service.test.ts
+│       ├── business-service.test.ts
+│       ├── yelp-business-service.test.ts
+│       └── yelp-review-service.test.ts
 ├── tsconfig.json
 └── tslint.json
 ```
